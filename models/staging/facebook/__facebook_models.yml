@@ -1,0 +1,91 @@
+version: 2
+
+models:
+  - name: stg_facebook_ads_stats
+    description: Cleaned daily Facebook advertising performance statistics.
+
+    columns:
+      - name: ad_id
+        description: Identifier for the Facebook ad.
+        data_tests:
+          - not_null
+
+      - name: account_id
+        description: Identifier for the advertising account.
+        data_tests:
+          - not_null
+
+      - name: ad_date
+        description: Date the advertising statistics were recorded.
+        data_tests:
+          - not_null
+
+      - name: spend
+        description: Advertising spend in the account's currency.
+        data_tests:
+          - not_null
+
+  - name: stg_facebook_campaigns
+    description: Cleaned Facebook campaign metadata.
+
+    columns:
+      - name: campaign_id
+        description: Unique identifier for a Facebook campaign.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: campaign_name
+        description: Name of the Facebook campaign.
+        data_tests:
+          - not_null
+
+  - name: stg_facebook_accounts
+    description: Cleaned Facebook advertising account details.
+
+    columns:
+      - name: account_id
+        description: Unique identifier for the advertising account.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: currency_code
+        description: Currency used by the advertising account.
+        data_tests:
+          - not_null
+
+  - name: stg_facebook_ads
+    description: Cleaned Facebook ad metadata.
+
+    columns:
+      - name: ad_id
+        description: Unique identifier for a Facebook ad.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: account_id
+        description: Identifier for the advertising account.
+        data_tests:
+          - not_null
+
+      - name: ad_status
+        description: Current status of the ad.
+        data_tests:
+          - not_null
+
+  - name: stg_facebook_ad_groups
+    description: Cleaned Facebook ad group metadata.
+
+    columns:
+      - name: ad_group_id
+        description: Unique identifier for a Facebook ad group.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: ad_group_name
+        description: Name of the Facebook ad group.
+        data_tests:
+          - not_null

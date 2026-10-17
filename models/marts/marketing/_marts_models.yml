@@ -1,0 +1,44 @@
+
+version: 2
+
+models:
+  - name: fct_marketing_ad_performance
+    description: >
+      Unified daily advertising performance fact table combining
+      Facebook and Snapchat metrics while preserving platform,
+      currency, and country reporting differences.
+
+    columns:
+      - name: ad_date
+        description: Date of the advertising performance observation.
+        data_tests:
+          - not_null
+
+      - name: platform
+        description: Advertising platform.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Facebook', 'Snapchat']
+
+      - name: ad_id
+        description: Platform-specific advertising identifier.
+        data_tests:
+          - not_null
+
+      - name: currency_code
+        description: Original currency of the reported spend.
+        data_tests:
+          - not_null
+
+      - name: spend
+        description: Advertising spend in the original reported currency.
+        data_tests:
+          - not_null
+
+      - name: impressions
+        description: Number of ad impressions, where reported.
+
+      - name: clicks
+        description: Number of ad clicks, where reported.

@@ -1,0 +1,23 @@
+version: 2
+
+sources:
+  - name: facebook
+    catalog: ads
+    schema: bronze
+    description: Raw Facebook advertising data loaded into Databricks
+    tables:
+      - name: facebook_accounts
+      - name: facebook_campaigns
+      - name: facebook_ad_groups
+      - name: facebook_ads
+      - name: facebook_ads_stats
+
+  - name: snapchat
+    catalog: ads
+    schema: bronze
+    description: Raw Snapchat advertising data loaded into Databricks
+    tables:
+      - name: snapchat_campaigns
+      - name: snapchat_ad_groups
+      - name: snapchat_ads
+      - name: snapchat_ads_stats

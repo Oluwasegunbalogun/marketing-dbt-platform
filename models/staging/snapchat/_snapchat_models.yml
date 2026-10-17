@@ -1,0 +1,76 @@
+version: 2
+
+models:
+  - name: stg_snapchat_ads_stats
+    description: Cleaned Snapchat daily ad performance at country level.
+
+    columns:
+      - name: ad_id
+        description: Identifier for the Snapchat ad.
+        data_tests:
+          - not_null
+
+      - name: ad_date
+        description: Date the ad performance was recorded.
+        data_tests:
+          - not_null
+
+      - name: currency_code
+        description: Currency used for the reported spend.
+        data_tests:
+          - not_null
+
+      - name: country
+        description: Country associated with the performance record.
+        data_tests:
+          - not_null
+
+  - name: stg_snapchat_ads
+    description: Cleaned Snapchat ad metadata.
+
+    columns:
+      - name: ad_id
+        description: Unique identifier for a Snapchat ad.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: ad_group_id
+        description: Identifier for the ad group containing the ad.
+        data_tests:
+          - not_null
+
+  - name: stg_snapchat_ad_groups
+    description: Snapchat ad groups deduplicated to the latest available record.
+
+    columns:
+      - name: ad_group_id
+        description: Business identifier for the ad group.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: campaign_id
+        description: Identifier for the campaign containing the ad group.
+        data_tests:
+          - not_null
+
+  - name: stg_snapchat_campaigns
+    description: Cleaned Snapchat campaign metadata.
+
+    columns:
+      - name: campaign_id
+        description: Unique identifier for a Snapchat campaign.
+        data_tests:
+          - not_null
+          - unique
+
+      - name: account_id
+        description: Identifier for the advertising account.
+        data_tests:
+          - not_null
+
+      - name: campaign_name
+        description: Name of the Snapchat campaign.
+        data_tests:
+          - not_null
