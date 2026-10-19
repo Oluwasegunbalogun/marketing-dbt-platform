@@ -1,10 +1,9 @@
-
 WITH ad_performance AS (
 
     SELECT
         stats.ad_date,
         'Snapchat' AS platform,
-        ads.ad_id,
+           stats.ad_id,
         ads.ad_group_id,
         ad_groups.campaign_id,
         campaigns.account_id,

@@ -1,4 +1,3 @@
-
 version: 2
 
 models:
@@ -6,7 +5,9 @@ models:
     description: >
       Unified daily advertising performance fact table combining
       Facebook and Snapchat metrics while preserving platform,
-      currency, and country reporting differences.
+      currency, and country reporting differences. The grain is one
+      row per date, platform, campaign, and ad. Spend remains in the
+      original reported currency and is not converted across currencies.
 
     columns:
       - name: ad_date
@@ -15,20 +16,38 @@ models:
           - not_null
 
       - name: platform
-        description: Advertising platform.
+        description: Advertising platform that reported the performance.
         data_tests:
           - not_null
           - accepted_values:
               arguments:
                 values: ['Facebook', 'Snapchat']
 
+      - name: account_id
+        description: Platform-specific advertising account identifier.
+
+      - name: campaign_id
+        description: Platform-specific campaign identifier.
+
+      - name: ad_group_id
+        description: Platform-specific ad group identifier.
+
       - name: ad_id
         description: Platform-specific advertising identifier.
         data_tests:
           - not_null
 
+      - name: campaign_name
+        description: Campaign name where available.
+
+      - name: ad_group_name
+        description: Ad group name where available.
+
+      - name: country
+        description: Country associated with the advertising record, where available.
+
       - name: currency_code
-        description: Original currency of the reported spend.
+        description: Original currency of the reported advertising spend.
         data_tests:
           - not_null
 
@@ -38,7 +57,28 @@ models:
           - not_null
 
       - name: impressions
-        description: Number of ad impressions, where reported.
+        description: >
+          Number of ad impressions. May be NULL when the source does not
+          report a value.
 
       - name: clicks
-        description: Number of ad clicks, where reported.
+        description: >
+          Number of ad clicks. May be NULL when the source does not
+          report a value.
+
+      - name: click_through_rate
+        description: >
+          Clicks divided by impressions, expressed as a ratio rather than
+          a percentage. For example, 0.05 represents 5%. Returns NULL
+          when impressions are zero or NULL.
+
+      - name: cost_per_click
+        description: >
+          Advertising spend divided by clicks, in the original spend
+          currency per click. Returns NULL when clicks are zero or NULL.
+
+      - name: cost_per_mille
+        description: >
+          Advertising spend multiplied by 1,000 and divided by impressions,
+          in the original spend currency per 1,000 impressions. Returns
+          NULL when impressions are zero or NULL.

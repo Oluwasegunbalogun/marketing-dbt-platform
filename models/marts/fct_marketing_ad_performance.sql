@@ -1,3 +1,4 @@
+
 SELECT
     ad_date,
     platform,
@@ -11,7 +12,12 @@ SELECT
     currency_code,
     spend,
     impressions,
-    clicks,
+    clicks,data_quality_status,
+    CASE
+        WHEN impressions IS NOT NULL AND impressions > 0
+            THEN clicks * 1.0 / impressions
+        ELSE NULL
+    END AS click_through_rate,
     CASE
         WHEN clicks IS NOT NULL AND clicks > 0
             THEN spend / clicks

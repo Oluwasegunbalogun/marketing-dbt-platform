@@ -11,9 +11,9 @@ SELECT
     currency_code,
     spend,
     impressions,
-    clicks
+    clicks,
+    data_quality_status
 FROM {{ ref('int_facebook_ad_performance') }}
-WHERE data_quality_status = 'OK'
 
 UNION ALL
 
@@ -30,5 +30,6 @@ SELECT
     currency_code,
     spend,
     impressions,
-    clicks
+    clicks,
+    'OK' AS data_quality_status
 FROM {{ ref('int_snapchat_ad_performance') }}

@@ -6,7 +6,11 @@
         {{ default_schema }}
 
     {%- elif custom_schema_name | trim == 'elementary' -%}
-        {{ default_schema }}_elementary
+        {%- if target.name == 'prod' -%}
+            elementary
+        {%- else -%}
+            {{ default_schema }}_elementary
+        {%- endif -%}
 
     {%- else -%}
         {{ custom_schema_name | trim }}
